@@ -4,7 +4,7 @@
   inputs = {
     # Package sources.
     master.url = "github:nixos/nixpkgs/master";
-    stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    stable.url = "github:nixos/nixpkgs/nixos-24.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -55,7 +55,7 @@
       system = "aarch64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nixos-apple-silicon.overlays.default ];
+        overlays = [ inputs.nixos-apple-silicon.overlays.default ];
       };
     in
     {

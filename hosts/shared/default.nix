@@ -37,10 +37,11 @@ in
     setupAsahiSound = true;
     useExperimentalGPUDriver = true;
     experimentalGPUInstallMode = "replace";
-    peripheralFirmwareDirectory = builtins.fetchTarball {
-      url = "https://qeden.me/asahi-firmware.tar.gz";
-      sha256 = "sha256-tsRkDsXr7NYsNLJoWHBd6xaybtT+SVw+9HYn4zQmezo=";
-    };
+    # peripheralFirmwareDirectory = builtins.fetchTarball {
+    #   url = "https://qeden.me/asahi-firmware.tar.gz";
+    #   sha256 = "sha256-tsRkDsXr7NYsNLJoWHBd6xaybtT+SVw+9HYn4zQmezo=";
+    # };
+    peripheralFirmwareDirectory = /boot/asahi;
   };
 
   zramSwap = {
@@ -186,7 +187,6 @@ in
     bluez-tools
     inotify-tools
     udiskie
-    rnix-lsp
     xorg.xwininfo
     brightnessctl
     networkmanager_dmenu
@@ -199,11 +199,12 @@ in
     appimage-run
     jq
     # spotdl
-    osu-lazer
+    # osu-lazer
     imgclr
     grim
     slop
-    eww-wayland
+    # eww-wayland
+    eww
     swaylock-effects
     git
     pstree
