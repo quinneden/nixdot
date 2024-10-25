@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env zsh
   #This script provides a rofi menu interface for wifi control
   #It uses and requires nmcli
@@ -121,4 +120,3 @@ _:
   fi
 
 ''
-

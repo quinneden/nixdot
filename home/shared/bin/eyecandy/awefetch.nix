@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env bash
   # Author: https://github.com/rxyhn 
 

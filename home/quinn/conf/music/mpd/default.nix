@@ -35,4 +35,3 @@
   };
   imports = [ (import ./misc.nix { inherit pkgs; }) ];
 }
-

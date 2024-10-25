@@ -1,4 +1,6 @@
-{ colors, pkgs }: with colors;{
+{ colors, pkgs }:
+with colors;
+{
   services.dunst = {
     enable = true;
     settings = {
@@ -56,7 +58,9 @@
         mouse_right_click = "close_current";
       };
 
-      fullscreen_delay_everything = { fullscreen = "delay"; };
+      fullscreen_delay_everything = {
+        fullscreen = "delay";
+      };
       urgency_low = {
         timeout = 8;
         background = "#${background}";

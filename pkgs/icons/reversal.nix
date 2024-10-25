@@ -1,4 +1,18 @@
-{ lib, stdenv, fetchFromGitHub, pkg-config, gdk-pixbuf, optipng, librsvg, gtk3, pantheon, gnome, gnome-icon-theme, hicolor-icon-theme, pkgs }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkg-config,
+  gdk-pixbuf,
+  optipng,
+  librsvg,
+  gtk3,
+  pantheon,
+  gnome,
+  gnome-icon-theme,
+  hicolor-icon-theme,
+  pkgs,
+}:
 stdenv.mkDerivation rec {
   pname = "reversal";
   name = "reversal";
@@ -33,4 +47,3 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 }
-

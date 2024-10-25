@@ -20,7 +20,7 @@
       oderwat.indent-rainbow
       naumovs.color-highlight
     ];
-    userSettings = with colors;{
+    userSettings = with colors; {
       "editor.fontFamily" = "'Iosevka Nerd Font', 'monospace', monospace";
       "editor.fontSize" = 16;
       "editor.formatOnSave" = true;
@@ -43,13 +43,20 @@
         "types" = "#${color6}";
         "textMateRules" = [
           {
-            "scope" = [ "invalid" "invalid.illegal" ];
+            "scope" = [
+              "invalid"
+              "invalid.illegal"
+            ];
             "settings" = {
               "foreground" = "#${color1}";
             };
           }
           {
-            "scope" = [ "keyword" "storage.type" "storage.modifier" ];
+            "scope" = [
+              "keyword"
+              "storage.type"
+              "storage.modifier"
+            ];
             "settings" = {
               "foreground" = "#${color5}";
             };

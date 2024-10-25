@@ -18,19 +18,18 @@ let
 in
 {
   boot.loader = {
-    systemd-boot.enable = false;
-    grub.enable = true;
-    grub.efiSupport = true;
-    grub.device = "nodev";
-    grub.darkmatter-theme = {
-      enable = true;
-      style = "nixos";
-    };
+    systemd-boot.enable = true;
+    # grub.enable = true;
+    # grub.efiSupport = true;
+    # grub.device = "nodev";
+    # grub.darkmatter-theme = {
+    #   enable = true;
+    #   style = "nixos";
+    # };
   };
-  # hardware.opengl.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
+  hardware.graphics.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   hardware.asahi = {
     withRust = true;
@@ -66,7 +65,7 @@ in
   # networking = {
   #   networkmanager.enable = true;
   #   firewall.enable = false;
-  # };
+  #};
 
   networking = {
     hostName = "nixos-macmini";
@@ -158,17 +157,17 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    settings.General = {
-      Enable = "Source,Sink,Media,Socket";
-      Experimental = true;
-    };
+    # settings.General = {
+    #   Enable = "Source,Sink,Media,Socket";
+    #   Experimental = true;
+    # };
     powerOnBoot = true;
   };
 
-  systemd.services.bluetooth.serviceConfig.ExecStart = [
-    ""
-    "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf"
-  ];
+  # systemd.services.bluetooth.serviceConfig.ExecStart = [
+  #   ""
+  #   "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf"
+  # ];
 
   security.rtkit.enable = true;
   virtualisation = {
@@ -177,6 +176,7 @@ in
   services.dbus.enable = true;
   # programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
+		nixfmt-rfc-style
     nodejs
     lutgen
     home-manager
@@ -200,11 +200,10 @@ in
     jq
     # spotdl
     # osu-lazer
-    imgclr
+    # imgclr
     grim
     slop
-    # eww-wayland
-    eww
+    eww-wayland
     swaylock-effects
     git
     pstree
@@ -217,6 +216,7 @@ in
     dmenu
     nix-prefetch-git
     python3
+		pure-prompt
     brillo
     wmctrl
     slop
@@ -239,6 +239,11 @@ in
     btrfs-progs
     micro
     wget
+    zoxide
+    bat
+    gh
+    nh
+    git-crypt
   ];
 
   security.pam.services.gdm.enableGnomeKeyring = true;
@@ -283,6 +288,7 @@ in
     settings = {
       access-tokens = [ "github=${secrets.github.api}" ];
       extra-nix-path = "nixpkgs=flake:nixpkgs";
+      extra-platforms = "x86_64-linux";
       experimental-features = [
         "nix-command"
         "flakes"
@@ -317,6 +323,6 @@ in
 
   system = {
     copySystemConfiguration = false;
-    stateVersion = "22.11";
+    stateVersion = "24.11";
   };
 }

@@ -1,10 +1,10 @@
 { colors }:
 
-with colors; {
+with colors;
+{
   xresources = {
     path = ".Xresources";
-    extraConfig = ''
-    '';
+    extraConfig = '''';
     properties = {
       "st.background" = "#${background}";
       "st.alt" = "#${mbg}";
@@ -36,4 +36,3 @@ with colors; {
     };
   };
 }
-

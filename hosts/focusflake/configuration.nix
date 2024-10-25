@@ -1,4 +1,12 @@
-{ inputs, outputs, config, pkgs, lib, self, ... }:
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  lib,
+  self,
+  ...
+}:
 {
 
   imports = [
@@ -21,10 +29,9 @@
   };
 
   # fuck you jio
-  networking.extraHosts =
-    ''
-      185.199.108.133 raw.githubusercontent.com
-    '';
+  networking.extraHosts = ''
+    185.199.108.133 raw.githubusercontent.com
+  '';
 
   networking.hostName = "focusflake";
   networking.useDHCP = false;

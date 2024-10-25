@@ -1,13 +1,30 @@
-{ config, lib, pkgs, colors, inputs, walltype, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  colors,
+  inputs,
+  walltype,
+  ...
+}:
 let
-  wall = if colors.name == "material" then "~/.cache/wallpapers/material.jpg" else "~/.wallpapers/${colors.name}.jpg";
-  w = if walltype == "image" then "output * bg ${wall} fill" else "output * bg #${colors.color8} solid_color";
+  wall =
+    if colors.name == "material" then
+      "~/.cache/wallpapers/material.jpg"
+    else
+      "~/.wallpapers/${colors.name}.jpg";
+  w =
+    if walltype == "image" then
+      "output * bg ${wall} fill"
+    else
+      "output * bg #${colors.color8} solid_color";
 in
 {
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   wayland.windowManager.sway = with colors; {
     enable = true;
     systemd.enable = true;
+    checkConfig = false;
     xwayland = true;
     package = inputs.swayfx.packages.${pkgs.system}.default;
     extraConfig = ''
@@ -60,7 +77,7 @@ in
           before-sleep 'waylock'
     '';
     config = {
-      terminal = "wezterm";
+      terminal = "kitty";
       menu = "rofi -show drun";
       modifier = "Mod4";
 
@@ -167,8 +184,7 @@ in
           "${mod}+minus" = "scratchpad show";
 
           "${mod}+Shift+c" = "kill";
-          "${mod}+Shift+e" =
-            "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+          "${mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${mod}+r" = "mode resize";
         };
@@ -183,13 +199,9 @@ in
         };
       };
       output = {
-        "DVI-D-1" = {
-          resolution = "1920x1080";
-          position = "0,0";
-        };
         "HDMI-A-1" = {
-          resolution = "1920x1080";
-          position = "1920,0";
+          resolution = "2560x1440";
+          position = "2560,0";
         };
       };
 
@@ -205,8 +217,9 @@ in
         smartBorders = "off";
         smartGaps = false;
       };
-      bars = [
-      ];
+      bars =
+        [
+        ];
     };
   };
 }

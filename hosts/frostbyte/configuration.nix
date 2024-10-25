@@ -14,10 +14,10 @@
     ../shared
   ];
 
-  nixpkgs = {
+  /* nixpkgs = {
     overlays = [
-      outputs.overlays.modifications
-      outputs.overlays.additions
+      # outputs.overlays.modifications
+      # outputs.overlays.additions
       inputs.nixpkgs-f2k.overlays.stdenvs
       inputs.nixpkgs-f2k.overlays.compositors
       inputs.nur.overlay
@@ -29,7 +29,7 @@
       allowUnfreePredicate = _: true;
       allowUnfree = true;
     };
-  };
+  }; */
 
   # # fuck you jio
   # networking.extraHosts = ''
@@ -45,8 +45,8 @@
   services = {
     gvfs.enable = true;
     power-profiles-daemon.enable = false;
-    tlp.enable = true;
-    upower.enable = true;
+    # tlp.enable = true;
+    # upower.enable = true;
     xserver = {
       enable = true;
       # videoDrivers = [ "amdgpu" ];

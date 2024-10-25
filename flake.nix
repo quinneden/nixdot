@@ -4,7 +4,7 @@
   inputs = {
     # Package sources.
     master.url = "github:nixos/nixpkgs/master";
-    stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    stable.url = "github:nixos/nixpkgs/nixos-22.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -28,7 +28,7 @@
 
     ags.url = "github:ozwaldorf/ags";
 
-    darkmatter.url = "gitlab:VandalByte/darkmatter-grub-theme";
+    # darkmatter.url = "gitlab:VandalByte/darkmatter-grub-theme";
 
     matugen = {
       url = "github:/InioX/Matugen";
@@ -55,15 +55,29 @@
       system = "aarch64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ inputs.nixos-apple-silicon.overlays.default ];
+        overlays = [
+          inputs.nixos-apple-silicon.overlays.default
+          inputs.nur.overlay
+          inputs.nixpkgs-f2k.overlays.stdenvs
+          inputs.nixpkgs-f2k.overlays.compositors
+          inputs.nur.overlay
+          (final: prev: {
+            awesome = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-git;
+          })
+		    ];
+    		config = {
+          allowUnfreePredicate = _: true;
+          allowUnfree = true;
+    		};
       };
     in
     {
-      formatter = pkgs.nixfmt-rfc-style;
-      overlays = import ./overlays { inherit inputs; };
-      # host configurations
+      formatter = forSystems (system: pkgs.nixfmt-rfc-style);
+      # overlays = import ./overlays { inherit inputs; };
+
       nixosConfigurations = {
         frostbyte = nixpkgs.lib.nixosSystem {
+					inherit system pkgs;
           specialArgs = {
             inherit
               inputs
@@ -73,12 +87,30 @@
               ;
           };
           modules = [
-            # > Our main nixos configuration file <
             inputs.home-manager.nixosModule
-            inputs.darkmatter.nixosModule
+            # inputs.darkmatter.nixosModule
             inputs.nixos-apple-silicon.nixosModules.default
             inputs.lix-module.nixosModules.default
             ./hosts/frostbyte/configuration.nix
+            {
+              home-manager = {
+                backupFileExtension = "backup";
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit
+                    inputs
+                    outputs
+                    dotdir
+                    secrets
+                    self
+                    ;
+                };
+                users.quinn = {
+                  imports = [ ./home/quinn/home.nix ];
+                };
+              };
+            }
           ];
         };
         focusflake = nixpkgs.lib.nixosSystem {
@@ -94,23 +126,23 @@
         };
       };
 
-      homeConfigurations = {
-        quinn = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = {
-            inherit
-              inputs
-              outputs
-              dotdir
-              secrets
-              self
-              ;
-          };
-          modules = [
-            ./home/quinn/home.nix
-          ];
-        };
-      };
+      #homeConfigurations = {
+      #  quinn = inputs.home-manager.lib.homeManagerConfiguration {
+      #    pkgs = import nixpkgs { inherit system; }; # Home-manager requires 'pkgs' instance
+      #    extraSpecialArgs = {
+      #      inherit
+      #        inputs
+      #        outputs
+      #        dotdir
+      #        secrets
+      #        self
+      #        ;
+      #    };
+      #    modules = [
+      #      ./home/quinn/home.nix
+      #    ];
+      #  };
+      #};
 
       frostbyte = self.nixosConfigurations.frostbyte.config.system.build.toplevel;
     };

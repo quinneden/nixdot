@@ -1,4 +1,9 @@
-{ colors, pkgs, inputs, ... }:
+{
+  colors,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   services.picom = {
     enable = false;
@@ -15,7 +20,10 @@
     backend = "glx";
     fade = true;
     fadeDelta = 3;
-    fadeSteps = [ 0.03 0.03 ];
+    fadeSteps = [
+      3.0e-2
+      3.0e-2
+    ];
 
     opacityRules = [
       # "85:class_g = 'kitty' && !focused"

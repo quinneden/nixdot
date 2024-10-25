@@ -1,6 +1,7 @@
 { colors, ... }:
 
-with colors ;{
+with colors;
+{
   home.file.".obsidian/themes/chadcat.css".text = ''
     :root
     {
@@ -545,5 +546,3 @@ with colors ;{
     }
   '';
 }
-
-

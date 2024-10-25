@@ -1,8 +1,9 @@
-{ lib
-, stdenvNoCC
-, fetchzip
-, pkgs
-, util-linux
+{
+  lib,
+  stdenvNoCC,
+  fetchzip,
+  pkgs,
+  util-linux,
 }:
 
 stdenvNoCC.mkDerivation rec {

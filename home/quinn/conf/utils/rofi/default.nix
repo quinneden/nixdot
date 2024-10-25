@@ -1,4 +1,9 @@
-{ config, pkgs, colors, ... }:
+{
+  config,
+  pkgs,
+  colors,
+  ...
+}:
 
 {
   programs.rofi = {
@@ -382,4 +387,3 @@
     '';
   */
 }
-

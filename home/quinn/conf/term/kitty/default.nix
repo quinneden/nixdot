@@ -1,6 +1,7 @@
 { pkgs, colors, ... }:
 
-with colors; {
+with colors;
+{
   programs.kitty = {
     enable = true;
     settings = {

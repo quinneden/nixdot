@@ -1,5 +1,6 @@
 { colors }:
-with colors;''
+with colors;
+''
   #!/usr/bin/env bash
   black=#${background}
   green=#${color2}

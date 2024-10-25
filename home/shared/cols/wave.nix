@@ -1,4 +1,4 @@
-{}:
+{ }:
 rec {
   foreground = "d7e0e0";
   cursorColor = "d7e0e0";

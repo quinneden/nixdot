@@ -1,5 +1,6 @@
-{ colors, pkgs }: {
-  programs.swaylock = with colors;{
+{ colors, pkgs }:
+{
+  programs.swaylock = with colors; {
     package = pkgs.swaylock-effects;
     settings = {
       clock = true;

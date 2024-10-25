@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env zsh
   command="$@"
   program=$(echo "$command" | awk '{print $1}')
@@ -7,4 +6,4 @@ _:
   	program="$NIX_PKG"
   fi
   nix-shell -p "$program" --run "$command"
-'' 
+''

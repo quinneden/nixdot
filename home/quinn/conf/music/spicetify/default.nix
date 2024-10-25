@@ -1,4 +1,8 @@
-{ colors, inputs, pkgs }:
+{
+  colors,
+  inputs,
+  pkgs,
+}:
 let
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
@@ -21,7 +25,8 @@ in
         sha256 = "01gy16b69glqcalz1wm8kr5wsh94i419qx4nfmsavm4rcvcr3qlx";
       };
     in
-    with colors; {
+    with colors;
+    {
       spotifyPackage = pkgs.spotify;
       enable = true;
       colorScheme = "custom";
@@ -78,4 +83,3 @@ in
       ];
     };
 }
-

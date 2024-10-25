@@ -35,6 +35,7 @@ in
     theme.name = "phocus";
   };
 
+  /*
   nixpkgs.overlays = [
     inputs.nur.overlay
   ];
@@ -45,6 +46,7 @@ in
     allowBroken = true;
     allowUnfreePredicate = _: true;
   };
+  */
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
@@ -59,30 +61,31 @@ in
         if [ ! -d "${config.home.homeDirectory}/.config/eww" ]; then
           ${pkgs.git}/bin/git clone --depth 1 --branch glacier https://github.com/chadcat7/crystal ${config.home.homeDirectory}/.config/eww
         fi
-        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-          ${pkgs.git}/bin/git clone --depth 1 https://github.com/chadcat7/kodo ${config.home.homeDirectory}/.config/nvim
-        fi
+        # if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
+        #   ${pkgs.git}/bin/git clone --depth 1 https://github.com/chadcat7/kodo ${config.home.homeDirectory}/.config/nvim
+        # fi
       '';
     };
     packages = with pkgs; [
       bc
+			eza
+			inputs.nix-shell-scripts.packages.${system}.default
       git-lfs
       feh
       wl-clipboard
       sway-contrib.grimshot
       trash-cli
       xss-lock
-      authy
       go
       gopls
       playerctl
       (pkgs.callPackage ../../pkgs/icons/papirus.nix { })
-      (pkgs.callPackage ../../pkgs/others/phocus.nix { inherit colors; })
+      (pkgs.callPackage ../../pkgs/others/phocus.nix { inherit colors inputs; })
       cinnamon.nemo
       i3lock-color
       rust-analyzer
       mpc-cli
-      ffmpeg_5-full
+      ffmpeg-full
       neovim
       libdbusmenu-gtk3
       xdg-desktop-portal
@@ -97,7 +100,7 @@ in
       mpdris2
       socat
       inputs.matugen.packages.${system}.default
-      inputs.swayhide.packages.${system}.default
+      # inputs.swayhide.packages.${system}.default
       pavucontrol
       fzf
       vesktop
@@ -114,8 +117,8 @@ in
     # Importing Configutations
     (import ../shared/xresources.nix { inherit colors; })
 
-    #(import ./conf/utils/swaylock/default.nix { inherit colors pkgs; })
-    #(import ./conf/utils/rofi/default.nix { inherit config pkgs colors; })
+    (import ./conf/utils/swaylock/default.nix { inherit colors pkgs; })
+    (import ./conf/utils/rofi/default.nix { inherit config pkgs colors; })
     (import ./conf/utils/dunst/default.nix { inherit colors pkgs; })
 
     (import ./conf/browsers/firefox/default.nix { inherit colors pkgs; })
@@ -136,20 +139,20 @@ in
     })
     (import ./conf/shell/tmux/default.nix { inherit pkgs; })
 
-    #(import ./conf/ui/hyprland/default.nix { inherit config pkgs lib inputs colors; })
-    #(import ./conf/ui/swayfx/default.nix { inherit config pkgs lib colors inputs walltype; })
-    #(import ./conf/ui/ags/default.nix { inherit pkgs inputs colors; })
+    (import ./conf/ui/hyprland/default.nix { inherit config pkgs lib inputs colors; })
+    (import ./conf/ui/swayfx/default.nix { inherit config pkgs lib colors inputs walltype; })
+    (import ./conf/ui/ags/default.nix { inherit pkgs inputs colors; })
 
     (import ./conf/term/wezterm/default.nix { inherit pkgs colors inputs; })
     (import ./conf/term/kitty/default.nix { inherit pkgs colors; })
 
-    #(import ./conf/editors/vscopium/default.nix { inherit pkgs colors; })
+    (import ./conf/editors/vscodium/default.nix { inherit pkgs colors; })
 
     # Music thingies
     # (import ./conf/music/spicetify/default.nix { inherit colors inputs pkgs; })
-    (import ./conf/music/mpd/default.nix { inherit config pkgs; })
-    (import ./conf/music/ncmp/hypr.nix { inherit config pkgs; })
-    (import ./conf/music/cava/default.nix { inherit colors; })
+    #(import ./conf/music/mpd/default.nix { inherit config pkgs; })
+    #(import ./conf/music/ncmp/hypr.nix { inherit config pkgs; })
+    #(import ./conf/music/cava/default.nix { inherit colors; })
 
     # Some file generation
     (import ./misc/vencord.nix { inherit config colors; })

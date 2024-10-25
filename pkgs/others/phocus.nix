@@ -1,18 +1,22 @@
-{ stdenvNoCC
-, fetchFromGitHub
-, nodePackages
-, colors
-,
+{
+  stdenvNoCC,
+  fetchFromGitHub,
+  colors,
+  inputs,
+  ...
 }:
+let
+  nodePackages = inputs.stable.legacyPackages.aarch64-linux.nodePackages;
+in
 stdenvNoCC.mkDerivation rec {
   pname = "phocus";
-  version = "0cf0eb35a927bffcb797db8a074ce240823d92de";
+  version = "master";
 
   src = fetchFromGitHub {
     owner = "phocus";
     repo = "gtk";
     rev = version;
-    sha256 = "sha256-URuoDJVRQ05S+u7mkz1EN5HWquhTC4OqY8MqAbl0crk=";
+    sha256 = "sha256-To4AL4XmAoHOVjlHQZMy8OaMt4G7v1h48Ka1XbWUSLI=";
   };
 
   patches = [
@@ -51,6 +55,8 @@ stdenvNoCC.mkDerivation rec {
   '';
 
   nativeBuildInputs = [ nodePackages.sass ];
-  installFlags = [ "DESTDIR=$(out)" "PREFIX=" ];
+  installFlags = [
+    "DESTDIR=$(out)"
+    "PREFIX="
+  ];
 }
-

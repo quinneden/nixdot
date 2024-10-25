@@ -1,4 +1,4 @@
-{}:
+{ }:
 rec {
   foreground = "e9ecf2";
   background = "18181c";
@@ -35,4 +35,3 @@ rec {
   color15 = "DCDFE4";
   name = "stardewnight";
 }
-

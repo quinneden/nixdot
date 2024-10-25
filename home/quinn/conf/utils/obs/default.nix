@@ -5,4 +5,3 @@
     plugins = [ pkgs.obs-studio-plugins.wlrobs ];
   };
 }
-

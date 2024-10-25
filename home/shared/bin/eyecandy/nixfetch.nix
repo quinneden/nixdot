@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #> Syntax: bash
   # Colors
   f=3 b=4

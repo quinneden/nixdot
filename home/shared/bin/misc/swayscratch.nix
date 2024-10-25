@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env bash
 
   if swaymsg -t get_tree | grep $1;

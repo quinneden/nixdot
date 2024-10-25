@@ -1,6 +1,12 @@
 # in home.nix
-{ pkgs, inputs, colors, ... }:
-with colors;{
+{
+  pkgs,
+  inputs,
+  colors,
+  ...
+}:
+with colors;
+{
   imports = [
     inputs.ags.homeManagerModules.default
   ];

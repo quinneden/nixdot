@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env sh
   notify-send "Process Started" "Now Set As A Temporary Wall! Wait Some Time For Permanent Effect"
   WALL=$1
@@ -8,4 +7,3 @@ _:
   cd /etc/nixos && home-manager switch --flake ".#$USER"
   notify-send "Process Finished" "You can restart awesome to check the changes"
 ''
-

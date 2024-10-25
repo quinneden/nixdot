@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env sh
   THEME=$1
   notify-send "Changing Theme" "Setting theme to $1"

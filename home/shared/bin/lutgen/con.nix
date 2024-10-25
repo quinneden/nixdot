@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env bash
   mkdir -p converted
   find . -depth -name "* *" -execdir rename " " "_" "{}" ";"

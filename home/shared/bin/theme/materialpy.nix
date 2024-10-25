@@ -1,5 +1,4 @@
-_:
-''
+_: ''
   #!/usr/bin/env python
   from material_color_utilities_python import *
   import sys 

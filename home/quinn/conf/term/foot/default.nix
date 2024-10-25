@@ -1,5 +1,6 @@
 { colors }:
-with colors;{
+with colors;
+{
   programs.foot = {
     enable = true;
     settings = {

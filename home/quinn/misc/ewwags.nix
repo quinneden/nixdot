@@ -1,6 +1,7 @@
 { config, colors, ... }:
 
-with colors ;{
+with colors;
+{
   home.file.".config/eww/style/_colors.scss".text = ''
     $background : #${background};
     $foreground : #${foreground};

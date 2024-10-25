@@ -1,6 +1,7 @@
 { colors, ... }:
 
-with colors; {
+with colors;
+{
   followSystem = {
     # basic colors
     background = "#${background}";

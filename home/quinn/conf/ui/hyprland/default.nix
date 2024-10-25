@@ -1,12 +1,24 @@
-{ config, lib, pkgs, inputs, colors, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  colors,
+  ...
+}:
 let
-  wall = if colors.name == "material" then "~/.cache/wallpapers/material.jpg" else "~/.wallpapers/${colors.name}.jpg";
+  wall =
+    if colors.name == "material" then
+      "~/.cache/wallpapers/material.jpg"
+    else
+      "~/.wallpapers/${colors.name}.jpg";
 in
 {
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   wayland.windowManager.hyprland = with colors; {
     enable = true;
-    #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
     systemd.enable = true;
     #plugins = [ inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars ];
     extraConfig = ''
@@ -19,15 +31,15 @@ in
         kb_layout = us
         kb_variant =
         kb_model =
-        kb_options = caps:escape
+        # kb_options = caps:escape
         kb_rules =
         follow_mouse = 1 # 0|1|2|3
         float_switch_override_focus = 2
         numlock_by_default = true
         touchpad {
-        natural_scroll = yes
+        	natural_scroll = yes
         }
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0.1 # -1.0 - 1.0, 0 means no modification.
       }
       general {
         gaps_in = 20
@@ -38,19 +50,18 @@ in
         layout = dwindle # master|dwindle 
       }
       dwindle {
-        no_gaps_when_only = false
+        # no_gaps_when_only = false
         force_split = 0 
         special_scale_factor = 0.8
         split_width_multiplier = 1.0 
         use_active_for_splits = true
         pseudotile = yes 
-        preserve_split = yes 
+        preserve_split = yes
       }
       master {
-        new_is_master = true
         special_scale_factor = 0.8
-        new_is_master = true
-        no_gaps_when_only = false
+        # new_is_master = true
+        # no_gaps_when_only = false
       }
       # cursor_inactive_timeout = 0
       decoration {
@@ -68,7 +79,7 @@ in
         dim_inactive = false
       # dim_strength = #0.0 ~ 1.0
         blur {
-          enabled: false
+          enabled = false
           size = 20
           passes = 4
           new_optimizations = true
@@ -123,14 +134,13 @@ in
         swallow_regex =
         focus_on_activate = true
       }
-      device:epic mouse V1 {
-        sensitivity = -0.5
-      }
-      bind = $mainMod, Return, exec, wezterm
-      bind = $mainMod, Q,exec,screenshotmenu
-      bind = $mainMod SHIFT, Return, exec, wezterm
-      bind = $mainMod SHIFT, C, killactive,
-      bind = $mainMod SHIFT, Q, exit,
+      # device:epic mouse V1 {
+      #   sensitivity = -0.5
+      # }
+      bind = $mainMod, Return, exec, kitty
+      bind = $mainMod SHIFT, Q, killactive,
+      bind = $mainMod CTRL, Delete, exit,
+      bind = $mainMod SHIFT, Return, exec, kitty
       bind = $mainMod SHIFT, Space, togglefloating,
       bind = $mainMod,F,fullscreen
       bind = $mainMod,Y,pin
